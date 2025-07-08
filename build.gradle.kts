@@ -9,6 +9,7 @@ plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
     eclipse
+    kotlin("jvm")
 }
 
 repositories {
@@ -22,6 +23,7 @@ dependencies {
 
     // This dependency is used by the application.
     implementation(libs.guava)
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -40,3 +42,4 @@ tasks.named<Test>("test") {
     // Use TestNG for unit tests.
     useTestNG()
 }
+
