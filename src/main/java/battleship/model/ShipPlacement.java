@@ -53,10 +53,8 @@ public class ShipPlacement extends Event{
         }
         return Optional.empty();
     }
-    public Stream<Coordinate> toCoordinates()
-    {
+    public Stream<Coordinate> toCoordinates() {
         Builder<Coordinate> builder = Stream.builder();
-        
         for (int i = 0; i < this.type.length; i++) {
             
             builder.add(this.start.plus(i, this.direction));
