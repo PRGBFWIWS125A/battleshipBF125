@@ -28,4 +28,8 @@ public class Game {
                 .map(event -> ((Shot)event).coordinate)
                 .collect(Collectors.toSet());
     }
+    public Stream<Event> getEventsByPlayer(final Player player){
+        return getEvents()
+                .filter(event -> event.isShotEvent(player) || event.isShipPlacementEvent(player));
+    }
 }
