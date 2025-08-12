@@ -32,4 +32,10 @@ public class Game {
         return getEvents()
                 .filter(event -> event.isShotEvent(player) || event.isShipPlacementEvent(player));
     }
+    public Set<Coordinate> getShipCoordinates(final Player player){
+        return getEvents()
+                .filter(event -> event.isShipPlacementEvent(player))
+                .flatMap(event -> ((ShipPlacement)event).toCoordinates())
+                .collect(Collectors.toSet());
+    }
 }
