@@ -8,7 +8,7 @@ public class ShipPlacement extends Event{
     final Coordinate start;
     final Direction direction;
 
-    public ShipPlacement(ShipType type, Player player, Coordinate start, Direction direction) {
+    public ShipPlacement(ShipType type, Coordinate start, Direction direction, Player player) {
         this.type = type;
         this.player = player;
         this.start = start;
@@ -37,17 +37,17 @@ public class ShipPlacement extends Event{
         int verticalDistance = end.row() - start.row();
         int horizontalDistance = end.column() - start.column();
 
-        if (verticalDistance + horizontalDistance == type.length - 1) {
-            if (verticalDistance == 0) {
+        if (Math.abs(verticalDistance + horizontalDistance) == type.length - 1) {
+            if (horizontalDistance == 0) {
+                if (verticalDistance > 0) {
+                    return Optional.of(Direction.SOUTH);
+                }
+                return Optional.of(Direction.NORTH);
+            } else if (verticalDistance == 0) {
                 if (horizontalDistance < 0) {
                     return Optional.of(Direction.WEST);
                 }
                 return Optional.of(Direction.EAST);
-            } else if (horizontalDistance == 0) {
-                if (verticalDistance < 0) {
-                    return Optional.of(Direction.NORTH);
-                }
-                return Optional.of(Direction.SOUTH);
             } else return Optional.empty();
         }
         return Optional.empty();
