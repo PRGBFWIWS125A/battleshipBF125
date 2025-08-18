@@ -1,8 +1,10 @@
 package battleship.model;
+
 import java.util.Optional;
 import java.util.stream.Stream;
 import java.util.stream.Stream.Builder;
-public class ShipPlacement extends Event{
+
+public class ShipPlacement extends Event {
 
     final ShipType type;
     final Player player;
@@ -53,10 +55,11 @@ public class ShipPlacement extends Event{
         }
         return Optional.empty();
     }
+
     public Stream<Coordinate> toCoordinates() {
         Builder<Coordinate> builder = Stream.builder();
         for (int i = 0; i < this.type.length; i++) {
-            
+
             builder.add(this.start.plus(i, this.direction));
         }
         return builder.build();

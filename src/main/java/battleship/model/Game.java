@@ -10,32 +10,34 @@ public class Game {
 
     private final List<Event> events;
 
-    public Game (){
+    public Game() {
         events = new ArrayList<Event>();
     }
 
-    public void addEvent (final Event event){
+    public void addEvent(final Event event) {
         events.add(event);
     }
 
-    public Stream<Event> getEvents(){
+    public Stream<Event> getEvents() {
         return events.stream();
     }
 
-    public Set<Coordinate> getActualShotCoordinates(final Player hitPlayer){
+    public Set<Coordinate> getActualShotCoordinates(final Player hitPlayer) {
         return getEvents()
                 .filter(event -> event.isShotEvent(hitPlayer.inverse()))
-                .map(event -> ((Shot)event).coordinate)
+                .map(event -> ((Shot) event).coordinate)
                 .collect(Collectors.toSet());
     }
-    public Stream<Event> getEventsByPlayer(final Player player){
+
+    public Stream<Event> getEventsByPlayer(final Player player) {
         return getEvents()
                 .filter(event -> event.isShotEvent(player) || event.isShipPlacementEvent(player));
     }
-    public Set<Coordinate> getShipCoordinates(final Player player){
+
+    public Set<Coordinate> getShipCoordinates(final Player player) {
         return getEvents()
                 .filter(event -> event.isShipPlacementEvent(player))
-                .flatMap(event -> ((ShipPlacement)event).toCoordinates())
+                .flatMap(event -> ((ShipPlacement) event).toCoordinates())
                 .collect(Collectors.toSet());
     }
 }
