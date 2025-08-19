@@ -70,7 +70,7 @@ public interface Rules {
             final int number,
             final int upperBoundExclusive
     ) {
-        return false;
+        return number >= lowerBoundInclusive && number < upperBoundExclusive;
     }
 
 }
