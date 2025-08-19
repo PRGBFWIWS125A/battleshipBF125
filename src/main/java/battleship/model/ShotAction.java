@@ -3,6 +3,7 @@ package battleship.model;
 public class ShotAction extends TurnAction {
 
     public ShotAction(Player player) {
+        super(player);
         // TODO Auto-generated constructor stub
     }
 
