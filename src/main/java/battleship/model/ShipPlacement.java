@@ -6,7 +6,7 @@ import java.util.stream.Stream.Builder;
 
 public class ShipPlacement extends Event {
 
-    final ShipType type;
+    public final ShipType type;
     final Player player;
     final Coordinate start;
     final Direction direction;

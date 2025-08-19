@@ -30,7 +30,9 @@ public interface Rules {
             final Player player,
             final Event event
     ) {
-        return false;
+        return event.isShipPlacementEvent(player) &&
+            ((ShipPlacement) event).type.equals(type) &&
+            validShipPlacement((ShipPlacement) event, game.getShipCoordinates(player));
     }
 
     default boolean shot(
