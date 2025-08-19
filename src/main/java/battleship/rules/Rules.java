@@ -30,9 +30,14 @@ public interface Rules {
             final Player player,
             final Event event
     ) {
-        return event.isShipPlacementEvent(player) &&
+        if( event.isShipPlacementEvent(player) &&
             ((ShipPlacement) event).type.equals(type) &&
-            validShipPlacement((ShipPlacement) event, game.getShipCoordinates(player));
+            validShipPlacement((ShipPlacement) event, game.getShipCoordinates(player)))
+        {
+            game.addEvent(event);
+            return true;
+        }
+        return false;
     }
 
     default boolean shot(
@@ -40,6 +45,11 @@ public interface Rules {
             final Player player,
             final Event event
     ) {
+        if ( event.isShotEvent(player) && validCoordinate(((Shot) event).coordinate))
+        {
+            game.addEvent(event);
+            return true;
+        }
         return false;
     }
 
