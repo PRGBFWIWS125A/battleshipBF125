@@ -30,10 +30,9 @@ public interface Rules {
             final Player player,
             final Event event
     ) {
-        if( event.isShipPlacementEvent(player) &&
-            ((ShipPlacement) event).type.equals(type) &&
-            validShipPlacement((ShipPlacement) event, game.getShipCoordinates(player)))
-        {
+        if (event.isShipPlacementEvent(player) &&
+                ((ShipPlacement) event).type.equals(type) &&
+                validShipPlacement((ShipPlacement) event, game.getShipCoordinates(player))) {
             game.addEvent(event);
             return true;
         }
@@ -45,8 +44,7 @@ public interface Rules {
             final Player player,
             final Event event
     ) {
-        if ( event.isShotEvent(player) && validCoordinate(((Shot) event).coordinate))
-        {
+        if (event.isShotEvent(player) && validCoordinate(((Shot) event).coordinate)) {
             game.addEvent(event);
             return true;
         }
@@ -54,14 +52,17 @@ public interface Rules {
     }
 
     default boolean validCoordinate(final Coordinate coordinate) {
-        return false;
+
+        return isBetween(0, coordinate.column(), getHorizontalLength()) &&
+                isBetween(0, coordinate.row(), getVerticalLength());
     }
 
     default boolean validShipPlacement(
             final ShipPlacement placement,
             final Collection<Coordinate> shipCoordinates
     ) {
-        return false;
+        return placement.toCoordinates().allMatch(coordinate -> validCoordinate(coordinate) &&
+                shipCoordinates.stream().noneMatch(existingCoordinate -> placementConflict(coordinate, existingCoordinate)));
     }
 
     public static boolean isBetween(
