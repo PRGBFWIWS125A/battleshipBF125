@@ -4,7 +4,7 @@ public enum Player {
     FIRST,
     SECOND;
 
-    Player inverse() {
+    public Player inverse() {
         switch (this) {
             case FIRST:
                 return SECOND;
