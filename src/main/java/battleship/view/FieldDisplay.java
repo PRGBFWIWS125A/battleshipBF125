@@ -74,7 +74,7 @@ public class FieldDisplay extends JButton {
                 g.setColor(Color.BLACK);
                 g.drawOval(0,0,size,size);
             case null, default:
-                // Wenn dieser Fall erreicht wird, hast du dich zu fingern.
+                // Wenn dieser Fall erreicht wird, hast du dich zu g.fingern()
         }
     }
 }
