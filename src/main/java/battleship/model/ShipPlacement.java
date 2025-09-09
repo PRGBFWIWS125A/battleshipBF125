@@ -28,14 +28,6 @@ public class ShipPlacement extends Event {
         return false;
     }
 
-    private static int distance(Coordinate start, Coordinate end) {
-        return Math.abs(start.column() - end.column()) + Math.abs(start.row() - end.row());
-    }
-
-    private static boolean onOneLine(Coordinate start, Coordinate end) {
-        return start.column() == end.column() || start.row() == end.row();
-    }
-
     public static Optional<Direction> toDirection(ShipType type, Coordinate start, Coordinate end) {
         int verticalDistance = end.row() - start.row();
         int horizontalDistance = end.column() - start.column();

@@ -1,19 +1,21 @@
 package battleship.view;
 
-import battleship.model.Coordinate;
-import battleship.model.Field;
-import org.w3c.dom.css.RGBColor;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.function.*;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.function.Consumer;
+
+import battleship.model.*;
 
 public class FieldDisplay extends JButton {
 
-    Coordinate coordinate;
+    private static final long serialVersionUID = 1L;
+    
+    private Coordinate coordinate;
+    
     private Field field;
+    
     private int size;
 
     public FieldDisplay(Coordinate pCoordinate, Field pField) {
