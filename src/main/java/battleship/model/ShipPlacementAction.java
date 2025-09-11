@@ -3,35 +3,34 @@ package battleship.model;
 public class ShipPlacementAction extends TurnAction {
 
     public final ShipType shipType;
-    
-    public ShipPlacementAction(Player player, ShipType type) {
+
+    public ShipPlacementAction(final Player player, final ShipType shipType) {
         super(player);
-        this.shipType = type;
+        this.shipType = shipType;
     }
 
     @Override
-    public Boolean apply(EventAndState eventAndState) {
+    public Boolean apply(final EventAndState eventAndState) {
         return eventAndState.rules().shipPlacement(
             eventAndState.game(),
-            shipType,
-            player,
+            this.shipType,
+            this.player,
             eventAndState.event()
         );
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (o instanceof ShipPlacementAction) {
-            ShipPlacementAction other = (ShipPlacementAction)o;
-            return this.player.equals(other.player)
-                && this.shipType.equals(other.shipType);
+            final ShipPlacementAction other = (ShipPlacementAction)o;
+            return this.player == other.player && this.shipType == other.shipType;
         }
         return false;
     }
-    
+
     @Override
     public int hashCode() {
         return this.player.hashCode() * 3 + this.shipType.hashCode() * 7;
     }
-    
+
 }

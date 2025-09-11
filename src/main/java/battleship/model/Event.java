@@ -1,37 +1,46 @@
 package battleship.model;
 
-import java.util.UUID;
+import java.util.*;
 
 public abstract class Event implements Comparable<Event> {
-    private final UUID id;
-    private final long timestamp;
+
+    public final UUID id;
+
+    public final long timestamp;
 
     public Event() {
         this(UUID.randomUUID(), System.currentTimeMillis());
     }
 
-    public Event(UUID id, long timestamp) {
+    public Event(final UUID id, final long timestamp) {
         this.id = id;
         this.timestamp = timestamp;
     }
 
-    public int compareTo(Event other) {
-        int result = Long.compare(this.timestamp, other.timestamp);
-        return result != 0 ? result : this.id.compareTo(other.id);
+    @Override
+    public int compareTo(final Event other) {
+        final int result = Long.compare(this.timestamp, other.timestamp);
+        if (result == 0) {
+            return this.id.compareTo(other.id);
+        }
+        return result;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Event)) return false;
-        return this.id.equals(((Event) obj).id);
+    public boolean equals(final Object o) {
+        if (o instanceof Event) {
+            return this.id.equals(((Event)o).id);
+        }
+        return false;
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode() * 3;
+        return this.id.hashCode();
     }
 
     public abstract boolean isShipPlacementEvent(Player player);
 
     public abstract boolean isShotEvent(Player player);
+
 }

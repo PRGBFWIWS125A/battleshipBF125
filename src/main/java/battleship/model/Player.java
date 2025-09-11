@@ -1,16 +1,18 @@
 package battleship.model;
 
 public enum Player {
-    FIRST,
-    SECOND;
+
+    FIRST, SECOND;
 
     public Player inverse() {
         switch (this) {
-            case FIRST:
-                return SECOND;
-            case SECOND:
-                return FIRST;
+        case FIRST:
+            return Player.SECOND;
+        case SECOND:
+            return Player.FIRST;
+        default:
+            throw new IllegalStateException("Unknown player detected!");
         }
-        return null; //default
     }
+
 }

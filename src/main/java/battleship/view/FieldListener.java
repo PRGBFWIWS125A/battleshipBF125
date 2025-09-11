@@ -6,14 +6,15 @@ import battleship.model.*;
 
 public class FieldListener implements BiConsumer<Coordinate, Field> {
 
-    public FieldListener(FieldGrid grid) {
-        // TODO Auto-generated constructor stub
+    private final FieldGrid grid;
+
+    public FieldListener(final FieldGrid grid) {
+        this.grid = grid;
     }
 
     @Override
-    public void accept(Coordinate coordinate, Field field) {
-        // TODO Auto-generated method stub
-        
+    public void accept(final Coordinate coordinate, final Field field) {
+        this.grid.setField(coordinate, field);
     }
 
 }

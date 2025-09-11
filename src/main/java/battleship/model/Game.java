@@ -1,43 +1,40 @@
 package battleship.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.*;
+import java.util.stream.*;
 
 public class Game {
 
     private final List<Event> events;
 
     public Game() {
-        events = new ArrayList<Event>();
+        this.events = new LinkedList<Event>();
     }
 
     public void addEvent(final Event event) {
-        events.add(event);
-    }
-
-    public Stream<Event> getEvents() {
-        return events.stream();
+        this.events.add(event);
     }
 
     public Set<Coordinate> getActualShotCoordinates(final Player hitPlayer) {
-        return getEvents()
-                .filter(event -> event.isShotEvent(hitPlayer.inverse()))
-                .map(event -> ((Shot) event).coordinate)
-                .collect(Collectors.toSet());
+        return this.events.stream()
+            .filter(event -> event.isShotEvent(hitPlayer.inverse()))
+            .map(event -> ((Shot)event).coordinate)
+            .collect(Collectors.toSet());
+    }
+
+    public Stream<Event> getEvents() {
+        return this.events.stream();
     }
 
     public Stream<Event> getEventsByPlayer(final Player player) {
-        return getEvents()
-                .filter(event -> event.isShotEvent(player) || event.isShipPlacementEvent(player));
+        return this.events.stream().filter(event -> event.isShipPlacementEvent(player) || event.isShotEvent(player));
     }
 
     public Set<Coordinate> getShipCoordinates(final Player player) {
-        return getEvents()
-                .filter(event -> event.isShipPlacementEvent(player))
-                .flatMap(event -> ((ShipPlacement) event).toCoordinates())
-                .collect(Collectors.toSet());
+        return this.events.stream()
+            .filter(event -> event.isShipPlacementEvent(player))
+            .flatMap(event -> ((ShipPlacement)event).toCoordinates())
+            .collect(Collectors.toCollection(LinkedHashSet::new));
     }
+
 }

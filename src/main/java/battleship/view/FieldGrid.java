@@ -78,7 +78,7 @@ public class FieldGrid extends JPanel {
             FieldGrid.center(label);
             this.add(label);
             for (int column = 0; column < fields[row].length; column++) {
-                final FieldDisplay display = new FieldDisplay(new Coordinate(column, row), fields[row][column]);
+                final FieldDisplay display = new FieldDisplay(fields[row][column], new Coordinate(column, row));
                 for (final Consumer<Coordinate> listener : this.coordinateListeners) {
                     display.addListener(listener);
                 }

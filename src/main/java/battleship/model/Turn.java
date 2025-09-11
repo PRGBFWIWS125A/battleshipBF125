@@ -1,4 +1,3 @@
 package battleship.model;
 
-public record Turn(TurnAction action, String prompt) {
-}
+public record Turn(TurnAction action, String prompt) {}
