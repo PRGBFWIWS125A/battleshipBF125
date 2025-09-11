@@ -6,14 +6,15 @@ import javax.swing.*;
 
 public class ErrorMessenger implements Consumer<String> {
 
-    public ErrorMessenger(JFrame parent) {
-        // TODO Auto-generated constructor stub
+    private final JFrame parent;
+
+    public ErrorMessenger(final JFrame parent) {
+        this.parent = parent;
     }
 
     @Override
-    public void accept(String t) {
-        // TODO Auto-generated method stub
-        
+    public void accept(final String errorMessage) {
+        JOptionPane.showMessageDialog(this.parent, errorMessage);
     }
 
 }

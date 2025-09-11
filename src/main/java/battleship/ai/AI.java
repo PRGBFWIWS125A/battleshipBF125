@@ -5,8 +5,8 @@ import battleship.rules.*;
 
 public interface AI {
 
-    ShipPlacement getShipPlacement(Rules rules, Field[][] ownFields, ShipType type);
+    ShipPlacement getShipPlacement(final Rules rules, final Field[][] ownFields, final ShipType type);
 
-    Shot getShot(Rules rules, Field[][] opponentField);
+    Shot getShot(final Rules rules, final Field[][] opponentField);
 
 }
